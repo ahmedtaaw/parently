@@ -10,8 +10,10 @@ import { GetUserComponent } from './get-user/get-user.component';
 import { ListUsersComponent } from './list-users/list-users.component';
 import { LoginComponent } from './login/login.component';
 
+import { HttpClientModule ,HttpClient} from '@angular/common/http'; 
+import { HttpModule } from '@angular/http';
 
-import { UserService } from './user.service';
+import { LoginService } from './login/login.service';
 
 import { AuthguardGuard } from './authguard.guard';
 
@@ -62,9 +64,10 @@ const appRoutes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
-    BrowserModule
+    BrowserModule,
+    HttpClientModule
   ],
-  providers: [UserService,AuthguardGuard],
+  providers: [LoginService,AuthguardGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
