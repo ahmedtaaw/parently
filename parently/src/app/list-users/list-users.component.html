@@ -1,3 +1,9 @@
+<ul class="pagination">
+  <li><a href="#" (click)="setPage(1,$event)">1</a></li>
+  <li><a href="#" (click)="setPage(2,$event)">2</a></li>
+  <li><a href="#" (click)="setPage(3,$event)">3</a></li>
+  <li><a href="#" (click)="setPage(4,$event)">4</a></li>
+</ul>
 <table class="table table-bordered" *ngIf='userslist && userslist.length'>
   <tr>
     <th>id</th>
@@ -9,6 +15,6 @@
     <td>{{user.id}}</td>
     <td>{{user.first_name}}</td>
     <td>{{user.last_name}}</td>
-    <td>{{user.avatar}}</td>
+    <td><img src='{{user.avatar}}' alt='asd'></td>
   </tr>
 </table>

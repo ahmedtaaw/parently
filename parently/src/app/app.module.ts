@@ -16,6 +16,7 @@ import { HttpModule } from '@angular/http';
 import { LoginService } from './login/login.service';
 import { ListUsersService } from './list-users/list-users.service';
 
+
 import { AuthguardGuard } from './authguard.guard';
 
 
@@ -66,7 +67,8 @@ const appRoutes: Routes = [
     BrowserModule,
     RouterModule.forRoot(appRoutes),
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    HttpModule
   ],
   providers: [LoginService,AuthguardGuard,ListUsersService],
   bootstrap: [AppComponent]
