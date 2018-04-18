@@ -14,6 +14,7 @@ import { HttpClientModule ,HttpClient} from '@angular/common/http';
 import { HttpModule } from '@angular/http';
 
 import { LoginService } from './login/login.service';
+import { ListUsersService } from './list-users/list-users.service';
 
 import { AuthguardGuard } from './authguard.guard';
 
@@ -67,7 +68,7 @@ const appRoutes: Routes = [
     BrowserModule,
     HttpClientModule
   ],
-  providers: [LoginService,AuthguardGuard],
+  providers: [LoginService,AuthguardGuard,ListUsersService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

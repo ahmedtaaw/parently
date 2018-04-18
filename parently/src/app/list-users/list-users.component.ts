@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import {LoginService} from '../login/login.service';
 
+import {ListUsersService} from './list-users.service';
+import {IPages,IUsers} from './list-users';
+
 @Component({
   selector: 'app-list-users',
   templateUrl: './list-users.component.html',
@@ -9,9 +12,14 @@ import {LoginService} from '../login/login.service';
 })
 export class ListUsersComponent implements OnInit {
 
-  constructor(private login:LoginService) { }
+  pageslist:IPages[];
+  userslist:IUsers[];
 
-  ngOnInit() {
+  constructor(private login:LoginService,
+  private _listUserService:ListUsersService) { }
+
+  ngOnInit():void {
+    this.userslist = this._listUserService.getuserslist();
   }
 
 }

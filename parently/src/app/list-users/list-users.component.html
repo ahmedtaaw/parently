@@ -1,3 +1,14 @@
-<p>
-  list-users works!
-</p>
+<table class="table table-bordered" *ngIf='userslist && userslist.length'>
+  <tr>
+    <th>id</th>
+    <th>first name</th>
+    <th>last name</th>
+    <th>avatar</th>
+  </tr>
+  <tr *ngFor='let user of userslist'>
+    <td>{{user.id}}</td>
+    <td>{{user.first_name}}</td>
+    <td>{{user.last_name}}</td>
+    <td>{{user.avatar}}</td>
+  </tr>
+</table>

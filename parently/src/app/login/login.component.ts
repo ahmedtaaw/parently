@@ -23,11 +23,11 @@ export class LoginComponent implements OnInit {
      this.username = e.target.elements[0].value;
      this.password = e.target.elements[1].value;
 
-     this.user.getLogin(this.username,this.password)
+     this.login.getLogin(this.username,this.password)
      .subscribe(data=>{
       if(data){
-         this.user.setUserLoggedIn();
-         if(this.user.isLoggedIn()){
+         this.login.setUserLoggedIn();
+         if(this.login.isLoggedIn()){
          this.router.navigate(['list-users']);
         }
       }
