@@ -21,12 +21,16 @@ export class GetUserComponent implements OnInit {
   readonly urlgetpost='https://reqres.in/api/users/';
   errorMessage: string;
   errorhandler: boolean = false;
+  errorhandlercreate:boolean=false;
   errorhandlercreatingprofile: boolean = false;
   userid:number=2;
 
   disablecreatebtn:boolean=true;
+  disabledeletebtn:boolean=true;
+  updateactionbtn:boolean=false;
 
   userForm:FormGroup;
+  updateuserForm:FormGroup;
 
   constructor(private login: LoginService,
   private httpclient:HttpClient,
@@ -44,6 +48,10 @@ export class GetUserComponent implements OnInit {
       userName:['',Validators.required],
       userJob: ['',Validators.required]
     });
+    this.updateuserForm=this.fb.group({
+      updateuserName:['',Validators.required],
+      updateuserJob: ['',Validators.required]
+    });
   }
 
   onKeyUpUser(e) {
@@ -57,11 +65,14 @@ export class GetUserComponent implements OnInit {
         this.singleuser=data;
         this.errorhandler=false;
         this.disablecreatebtn=false;
+        this.disabledeletebtn=false;
       },
       (error:any)=>{
         this.errorhandler=true;
         this.toastr.error('Your search not found!');
-        this.disablecreatebtn=true;}
+        this.disablecreatebtn=true;
+        this.disabledeletebtn=true;
+      }
     );
   }
 
@@ -74,6 +85,39 @@ export class GetUserComponent implements OnInit {
       (error:any)=>{this.errorhandlercreatingprofile=true;this.toastr.error('Error Creating User')}
     );
   }
+
+  updateUser(){ 
+    this.httpclient.put(this.urlgetpost+this.userid,{
+      "name":  this.updateuserForm.value.updateuserName,
+      "job": this.updateuserForm.value.updateuserJob
+    }).subscribe(
+      (data:any)=>{
+        this.errorhandlercreatingprofile=false;
+        this.toastr.success('User with this id '+this.userid, 'successfully updated !');
+        this.updateactionbtn=true;
+      },
+      (error:any)=>{
+        this.errorhandlercreatingprofile=true;
+        this.toastr.error('Error Updating User');
+        this.updateactionbtn=false;
+      }
+    );
+  }
+
+  deleteUser(){ 
+    this.httpclient.delete(this.urlgetpost+this.userid).subscribe(
+      (data:any)=>{
+        this.disablecreatebtn=true;
+        this.toastr.success('User with this id '+this.userid, 'successfully deleted !');
+        
+      },
+      (error:any)=>{
+        this.toastr.error('Error deleting User');
+        this.disablecreatebtn=false;
+      }
+    );
+  }
+
 
   closeResult: string;
   open(updateuser) {
