@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Injectable,Injector  } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
@@ -10,6 +10,8 @@ import {Observable} from 'rxjs/Observable';
 
 import { FormGroup, FormBuilder, Validator, Validators } from '@angular/forms';
 import { Conditional } from '@angular/compiler';
+
+@Injectable()
 
 @Component({
   selector: 'app-get-user',
