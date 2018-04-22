@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router'
+import { Router } from '@angular/router';
+import { FormControl, FormGroup } from '@angular/forms';
 
 import {LoginService} from './login.service';
 
@@ -11,17 +12,25 @@ import {LoginService} from './login.service';
 export class LoginComponent implements OnInit {
   username:string;
   password:string;
+
+  loginForm: FormGroup;
+
   constructor(
   private login:LoginService,
   private router:Router) { }
 
   ngOnInit() {
+    this.loginForm=new FormGroup({
+      loginEmail:new FormControl(''),
+      loginPassword:new FormControl('')
+    });
   }
 
-  loginUser(e) {
-    e.preventDefault();
-     this.username = e.target.elements[0].value;
-     this.password = e.target.elements[1].value;
+
+  loginUser({value,valid}:{value:any,valid:boolean}) {
+   
+     this.username = value.loginEmail;
+     this.password = value.loginPassword;
 
      this.login.getLogin(this.username,this.password)
      .subscribe(data=>{

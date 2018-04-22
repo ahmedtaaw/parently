@@ -3,14 +3,14 @@
   <div class="row>">
     <div class="col-sm-6 col-sm-push-3">
         <h2 class="text-center">Log in</h2>    
-        <form (submit)="loginUser($event)">
+        <form (submit)="loginUser(loginForm)" [formGroup]="loginForm" novalidate>
         <div class="form-group">
           <label class="sr-only">email</label>
-            <input type="text" class="form-control" placeholder="email" required="required">
+            <input type="text" class="form-control" placeholder="email" formControlName="loginEmail">
         </div>
         <div class="form-group">
             <label class="sr-only">password</label>
-            <input type="password" class="form-control" placeholder="Password"  required="required">
+            <input type="password" class="form-control" placeholder="Password" formControlName="loginPassword">
         </div>
         <div class="form-group">
             <input type="submit" value="login" class="btn btn-primary btn-block">

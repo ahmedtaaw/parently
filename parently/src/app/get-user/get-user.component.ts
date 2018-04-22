@@ -53,10 +53,9 @@ export class GetUserComponent implements OnInit {
   }
 
   createUser(){
-    console.log(this.userForm.value);
     this.httpclient.post(this.urlgetpost,{
-      "name": "morpheus",
-      "job": "leader"
+      "name":  this.userForm.value.userName,
+      "job": this.userForm.value.userJob
     }).subscribe(
       (data:any)=>{console.log(data);this.errorhandlercreatingprofile=false;},
       (error:any)=>{this.errorhandlercreatingprofile=true;}
