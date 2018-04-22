@@ -26,6 +26,7 @@ export class LoginService {
   }  
 
   isLoggedIn(){
+    console.log("this.isUserLoggedIn: "+this.isUserLoggedIn);
     return this.isUserLoggedIn;
   }
 

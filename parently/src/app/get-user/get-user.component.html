@@ -1,3 +1,35 @@
-<p>
-  get-user works!
-</p>
+<div class="form-group">
+  <input type="number" (keyup)="onKeyUpUser($event)">
+  <button (click)="getUser()">Search</button>
+</div>
+
+<div class="alert alert-danger" *ngIf="errorhandler">
+  <strong>Danger!</strong> User Not found!
+</div>
+<table class="table table-bordered" *ngIf="singleuser">
+  <tr>
+    <th>id</th>
+    <th>first name</th>
+    <th>last name</th>
+    <th>avatar</th>
+  </tr>
+  <tr>
+    <td>{{singleuser.data.id}}</td>
+    <td>{{singleuser.data.first_name}}</td>
+    <td>{{singleuser.data.last_name}}</td>
+    <td>
+      <img src='{{singleuser.data.avatar}}' alt='asd'>
+    </td>
+  </tr>
+</table>
+
+
+<form class="form-group" [formGroup]="userForm">
+ <input type="text" formControlName="userName" placeholder="user name">
+ <input type="text" formControlName="userJob" placeholder="job">
+  <button (click)="createUser()">Create User</button>
+</form>
+
+<div class="alert alert-danger" *ngIf="errorhandler">
+  <strong>Danger!</strong> User Not Created!
+</div>

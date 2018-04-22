@@ -1,6 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ReactiveFormsModule } from '@angular/forms'
 
 import { AppComponent } from './app.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
@@ -68,9 +69,14 @@ const appRoutes: Routes = [
     RouterModule.forRoot(appRoutes),
     BrowserModule,
     HttpClientModule,
-    HttpModule
+    HttpModule,
+    ReactiveFormsModule
   ],
-  providers: [LoginService,AuthguardGuard,ListUsersService],
+  providers: [
+    LoginService,
+    AuthguardGuard,
+    ListUsersService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
