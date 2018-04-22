@@ -30,10 +30,12 @@
 </table>
 
 
-<form class="form-group" [formGroup]="userForm" novalidate>
-  <input type="text" formControlName="userName" placeholder="user name">
-  <input type="text" formControlName="userJob" placeholder="job">
-  <button (click)="createUser()">Create User</button>
+<form class=" form-inline" [formGroup]="userForm" novalidate>
+  <div class="form-group">
+  <input type="text" class="form-control" formControlName="userName" placeholder="user name">
+  <input type="text" class="form-control" formControlName="userJob" placeholder="job">
+  <button  class="btn btn-primary" (click)="createUser()">Create User</button>
+</div>
 </form>
 
 <div class="alert alert-danger" *ngIf="errorhandlercreatingprofile">
