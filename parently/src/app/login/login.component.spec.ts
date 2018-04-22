@@ -1,6 +1,13 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { ReactiveFormsModule } from '@angular/forms';
 import { LoginComponent } from './login.component';
+import { ToastrService,ToastrModule} from 'ngx-toastr';
+import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+
+import {LoginService} from './login.service';
+import { HttpClient,HttpHandler} from '@angular/common/http'; 
+
+import { RouterModule, Routes } from '@angular/router';
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
@@ -8,7 +15,14 @@ describe('LoginComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
+      imports: [
+        ReactiveFormsModule,
+        ToastrModule.forRoot(),
+        NgbModule.forRoot(),
+        RouterModule,
+      ],
+      declarations: [ LoginComponent ],
+      providers:[LoginService,HttpClient,HttpHandler,ToastrService]
     })
     .compileComponents();
   }));

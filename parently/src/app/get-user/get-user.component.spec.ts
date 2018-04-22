@@ -3,9 +3,9 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { GetUserComponent } from './get-user.component';
 
 import { LoginService } from '../login/login.service';
-import { HttpClient,HttpHandler} from '@angular/common/http'; 
-import { ToastrService,ToastrModule} from 'ngx-toastr';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { HttpClient,HttpHandler } from '@angular/common/http'; 
+import { ToastrService,ToastrModule } from 'ngx-toastr';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 describe('GetUserComponent', () => {
   let component: GetUserComponent;
