@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import {NgbModal, ModalDismissReasons} from '@ng-bootstrap/ng-bootstrap';
 
 import { LoginService } from '../login/login.service';
 import { ISingleuser } from './singleuser';
@@ -22,11 +24,15 @@ export class GetUserComponent implements OnInit {
   errorhandlercreatingprofile: boolean = false;
   userid:number=2;
 
+  disablecreatebtn:boolean=true;
+
   userForm:FormGroup;
 
   constructor(private login: LoginService,
   private httpclient:HttpClient,
-  private fb:FormBuilder
+  private fb:FormBuilder,
+  private toastr: ToastrService,
+  private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
@@ -47,8 +53,15 @@ export class GetUserComponent implements OnInit {
   getUser() {
     this.httpclient.get(this.urlgetpost+this.userid)
     .subscribe(
-      (data:any[])=>{this.singleuser=data;this.errorhandler=false;},
-      (error:any)=>{this.errorhandler=true;}
+      (data:any[])=>{
+        this.singleuser=data;
+        this.errorhandler=false;
+        this.disablecreatebtn=false;
+      },
+      (error:any)=>{
+        this.errorhandler=true;
+        this.toastr.error('Your search not found!');
+        this.disablecreatebtn=true;}
     );
   }
 
@@ -57,10 +70,27 @@ export class GetUserComponent implements OnInit {
       "name":  this.userForm.value.userName,
       "job": this.userForm.value.userJob
     }).subscribe(
-      (data:any)=>{console.log(data);this.errorhandlercreatingprofile=false;},
-      (error:any)=>{this.errorhandlercreatingprofile=true;}
+      (data:any)=>{this.errorhandlercreatingprofile=false;this.toastr.success('User '+this.userForm.value.userName, 'successfully created !')},
+      (error:any)=>{this.errorhandlercreatingprofile=true;this.toastr.error('Error Creating User')}
     );
   }
 
+  closeResult: string;
+  open(updateuser) {
+    this.modalService.open(updateuser).result.then((result) => {
+      this.closeResult = `Closed with: ${result}`;
+    }, (reason) => {
+      this.closeResult = `Dismissed ${this.getDismissReason(reason)}`;
+    });
+  }
+  private getDismissReason(reason: any): string {
+    if (reason === ModalDismissReasons.ESC) {
+      return 'by pressing ESC';
+    } else if (reason === ModalDismissReasons.BACKDROP_CLICK) {
+      return 'by clicking on a backdrop';
+    } else {
+      return  `with: ${reason}`;
+    }
+  }
  
 }

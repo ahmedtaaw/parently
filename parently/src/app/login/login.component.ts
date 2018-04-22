@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, FormGroup } from '@angular/forms';
 
+import { ToastrService } from 'ngx-toastr';
+
 import {LoginService} from './login.service';
 
 @Component({
@@ -17,9 +19,11 @@ export class LoginComponent implements OnInit {
 
   constructor(
   private login:LoginService,
-  private router:Router) { }
+  private router:Router,
+  private toastr: ToastrService) { }
 
   ngOnInit() {
+    
     this.loginForm=new FormGroup({
       loginEmail:new FormControl(''),
       loginPassword:new FormControl('')
@@ -35,11 +39,12 @@ export class LoginComponent implements OnInit {
      this.login.getLogin(this.username,this.password)
      .subscribe(data=>{
       if(data){
+        this.toastr.success('Hello '+this.username, 'login success!')
          this.login.setUserLoggedIn();
          if(this.login.isLoggedIn()){
          this.router.navigate(['list-users']);
         }
-      }
+      } 
      
     });
   }
