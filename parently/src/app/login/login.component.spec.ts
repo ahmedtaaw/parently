@@ -6,7 +6,7 @@ import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 
 import {LoginService} from './login.service';
 import { HttpClient,HttpHandler} from '@angular/common/http'; 
-
+import { RouterTestingModule } from '@angular/router/testing'
 import { RouterModule, Routes } from '@angular/router';
 
 describe('LoginComponent', () => {
@@ -20,6 +20,7 @@ describe('LoginComponent', () => {
         ToastrModule.forRoot(),
         NgbModule.forRoot(),
         RouterModule,
+        RouterTestingModule
       ],
       declarations: [ LoginComponent ],
       providers:[LoginService,HttpClient,HttpHandler,ToastrService]

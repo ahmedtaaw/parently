@@ -5,24 +5,26 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { ToastrModule } from 'ngx-toastr';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 import { AppComponent } from './app.component';
 import { UpdateUserComponent } from './update-user/update-user.component';
 import { DeleteUserComponent } from './delete-user/delete-user.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { GetUserComponent } from './get-user/get-user.component';
-import { ListUsersComponent } from './list-users/list-users.component';
+//import { ListUsersComponent } from './list-users/list-users.component';
 import { LoginComponent } from './login/login.component';
+import { UsersListComponent } from './users-list/users-list.component';
 
-import { HttpClientModule ,HttpClient} from '@angular/common/http'; 
-import { HttpModule } from '@angular/http';
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { HttpModule,Http, ConnectionBackend,RequestOptions } from '@angular/http';
 
 import { LoginService } from './login/login.service';
-import { ListUsersService } from './list-users/list-users.service';
+//import { ListUsersService } from './list-users/list-users.service';
 
 
 import { AuthguardGuard } from './authguard.guard';
+
 
 
 const appRoutes: Routes = [
@@ -32,7 +34,7 @@ const appRoutes: Routes = [
   },
   {
     path: 'list-users',
-    component: ListUsersComponent,
+    component: UsersListComponent,
     canActivate: [AuthguardGuard]
   },
   {
@@ -65,8 +67,8 @@ const appRoutes: Routes = [
     DeleteUserComponent,
     CreateUserComponent,
     GetUserComponent,
-    ListUsersComponent,
-    LoginComponent
+    LoginComponent,
+    UsersListComponent
   ],
   imports: [
     BrowserModule,
@@ -75,14 +77,15 @@ const appRoutes: Routes = [
     HttpClientModule,
     HttpModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule, 
+    BrowserAnimationsModule,
     ToastrModule.forRoot(),
     NgbModule.forRoot()
+    
   ],
   providers: [
     LoginService,
     AuthguardGuard,
-    ListUsersService
+    Http
   ],
   bootstrap: [AppComponent]
 })
